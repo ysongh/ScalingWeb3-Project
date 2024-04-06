@@ -1,9 +1,22 @@
+import { HashRouter, Route, Routes } from 'react-router-dom';
+
 import './App.css';
 
 function App() {
   return (
     <>
-      <h1>Scaling Web3 Project</h1>
+      <HashRouter>
+        <Routes>
+          <Route
+            path="/test"
+            element={
+              <h1>Test</h1>} />
+          <Route
+            path="/"
+            element={
+              <h1>Home</h1>} />
+        </Routes>
+      </HashRouter>
     </>
   )
 }
