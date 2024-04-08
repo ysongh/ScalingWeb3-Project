@@ -1,6 +1,7 @@
-import { ChakraProvider, Text } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
+import Home from './pages/Home';
 import './App.css';
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
           <Route
             path="/"
             element={
-              <h1>Home</h1>} />
+              <Home />} />
         </Routes>
       </HashRouter>
     </ChakraProvider>
