@@ -1,10 +1,11 @@
+import { ChakraProvider, Text } from '@chakra-ui/react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 
 function App() {
   return (
-    <>
+    <ChakraProvider>
       <HashRouter>
         <Routes>
           <Route
@@ -17,7 +18,7 @@ function App() {
               <h1>Home</h1>} />
         </Routes>
       </HashRouter>
-    </>
+    </ChakraProvider>
   )
 }
 
