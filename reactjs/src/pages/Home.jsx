@@ -19,7 +19,7 @@ function Home() {
         <Text fontSize="xl" color="gray.600" mb="8">
          A random Scaling Web3 project
         </Text>
-        <Button colorScheme="blue" size="lg" onClick={() => router('/')}>
+        <Button colorScheme="blue" size="lg" onClick={() => router('/attestations')}>
           Get Started
         </Button>
       </Container>

@@ -2,6 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import Home from './pages/Home';
+import Attestations from './pages/Attestations';
 import './App.css';
 
 function App() {
@@ -13,6 +14,10 @@ function App() {
             path="/test"
             element={
               <h1>Test</h1>} />
+          <Route
+            path="/attestations"
+            element={
+              <Attestations />} />
           <Route
             path="/"
             element={
