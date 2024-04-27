@@ -28,6 +28,15 @@ function Attestations() {
     // txHash: "0x52c4162741e463a5f0d0577b43f19c87547413dc5b998a715f99096150b40483"
   }
 
+  const createAttestation = async () => {
+    const createAttestationRes = await ethsignClient.createAttestation({
+      schemaId: '0x55',
+      data: { name: 'test' },
+      indexingValue: 'xxx',
+    });
+    console.log(createAttestationRes);
+  }
+
   return (
     <div>
       <h1>Attestations</h1>
@@ -36,6 +45,9 @@ function Attestations() {
       </Button>
       <Button onClick={createSchema}>
         Create Schema
+      </Button>
+      <Button onClick={createAttestation}>
+        Create Attestation
       </Button>
     </div>
   )
