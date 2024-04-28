@@ -3,6 +3,7 @@ import {
   SignProtocolClient,
   SpMode,
   EvmChains,
+  IndexService,
 } from '@ethsign/sp-sdk';
 import { Button } from '@chakra-ui/react';
 
@@ -37,6 +38,12 @@ function Attestations() {
     console.log(createAttestationRes);
   }
 
+  async function getSchemaListFromIndexService() {
+    const indexService = new IndexService('testnet');
+    const res = await indexService.querySchemaList({ page: 1 });
+    console.log(res);
+  }
+
   return (
     <div>
       <h1>Attestations</h1>
@@ -48,6 +55,9 @@ function Attestations() {
       </Button>
       <Button onClick={createAttestation}>
         Create Attestation
+      </Button>
+      <Button onClick={getSchemaListFromIndexService}>
+        Get Schema List From Index Service
       </Button>
     </div>
   )
