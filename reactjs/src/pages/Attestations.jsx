@@ -7,8 +7,11 @@ import {
 } from '@ethsign/sp-sdk';
 import { Button } from '@chakra-ui/react';
 
+import TableList from '../components/TableList';
+
 function Attestations() {
   const [ethsignClient, setethsignClient] = useState(null);
+  const [schemaList, setschemaList] = useState([]);
 
   const loadClient = () => {
     const client = new SignProtocolClient(SpMode.OnChain, {
@@ -42,6 +45,7 @@ function Attestations() {
     const indexService = new IndexService('testnet');
     const res = await indexService.querySchemaList({ page: 1 });
     console.log(res);
+    setschemaList(res.rows);
   }
 
   return (
@@ -59,6 +63,7 @@ function Attestations() {
       <Button onClick={getSchemaListFromIndexService}>
         Get Schema List From Index Service
       </Button>
+      <TableList schemaList={schemaList} />
     </div>
   )
 }
