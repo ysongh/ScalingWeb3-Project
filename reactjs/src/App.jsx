@@ -5,7 +5,6 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
 import Attestations from './pages/Attestations';
-import './App.css';
 
 function App() {
   const [ethAddress, setETHAddress] = useState('');
