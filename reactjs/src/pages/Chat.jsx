@@ -1,9 +1,9 @@
 import { useClient } from '@xmtp/react-sdk';
 
-function Chat() {
+function Chat({ userSigner }) {
   const { client, error, isLoading, initialize } = useClient();
 
-  console.log(client, initialize);
+  console.log(client, initialize, userSigner);
 
   if (error) {
     return "An error occurred while initializing the client";
