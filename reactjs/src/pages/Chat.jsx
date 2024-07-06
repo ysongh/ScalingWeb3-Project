@@ -21,6 +21,11 @@ function Chat({ userSigner, ethAddress }) {
       buildLocalStorageKey(walletAddress),  
       Buffer.from(keys).toString(ENCODING),  
     );  
+  };
+
+  const loadKeys = (walletAddress) => {  
+    const val = localStorage.getItem(buildLocalStorageKey(walletAddress));  
+    return val ? Buffer.from(val, ENCODING) : null;  
   };  
 
   const initXmtp = async () => {
@@ -28,13 +33,17 @@ function Chat({ userSigner, ethAddress }) {
       env: "dev"  
     };
 
-    const keys = await Client.getKeys(userSigner, {  
-      ...options,  
-      skipContactPublishing: true,  
-      persistConversations: false,  
-    });  
-    console.log(keys);
-    storeKeys(ethAddress, keys);  
+    let keys = loadKeys(ethAddress);  
+    
+    if (!keys) {
+      keys = await Client.getKeys(userSigner, {  
+        ...options,  
+        skipContactPublishing: true,  
+        persistConversations: false,  
+      });  
+      console.log(keys);
+      storeKeys(ethAddress, keys);
+    }
   }
 
   if (error) {
