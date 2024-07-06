@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useClient, Client } from '@xmtp/react-sdk';
 
-function Chat({ userSigner }) {
+function Chat({ userSigner, ethAddress }) {
   const { client, error, isLoading, initialize } = useClient();
 
   console.log(client, initialize, userSigner);
@@ -10,6 +10,18 @@ function Chat({ userSigner }) {
   useEffect(() => {
     if (userSigner) initXmtp();
   }, [userSigner])
+
+  const ENCODING = "binary";
+
+  const buildLocalStorageKey = (walletAddress) =>
+    walletAddress ? `xmtp:dev:keys:${walletAddress}` : "";
+
+  const storeKeys = (walletAddress, keys) => {  
+    localStorage.setItem(  
+      buildLocalStorageKey(walletAddress),  
+      Buffer.from(keys).toString(ENCODING),  
+    );  
+  };  
 
   const initXmtp = async () => {
     const options = {  
@@ -22,8 +34,8 @@ function Chat({ userSigner }) {
       persistConversations: false,  
     });  
     console.log(keys);
+    storeKeys(ethAddress, keys);  
   }
-  
 
   if (error) {
     return "An error occurred while initializing the client";

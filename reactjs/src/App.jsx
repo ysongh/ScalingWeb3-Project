@@ -26,7 +26,7 @@ function App() {
           <Route
             path="/chat"
             element={
-              <Chat userSigner={userSigner} />} />
+              <Chat userSigner={userSigner} ethAddress={ethAddress} />} />
           <Route
             path="/attestations"
             element={
