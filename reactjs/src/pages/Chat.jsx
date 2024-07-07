@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
-import { useClient, Client } from '@xmtp/react-sdk';
+import { useClient, useCanMessage, useStartConversation, Client } from '@xmtp/react-sdk';
+import { Button, Container } from '@chakra-ui/react';
 
 function Chat({ userSigner, ethAddress }) {
   const { client, error, isLoading, initialize } = useClient();
+  const { startConversation } = useStartConversation();
+  const { canMessage } = useCanMessage();
 
   console.log(client);
-  
+
   useEffect(() => {
     if (userSigner) initXmtp();
   }, [userSigner])
@@ -47,6 +50,14 @@ function Chat({ userSigner, ethAddress }) {
     await initialize({ keys, options, userSigner });
   }
 
+  const sendMessage = async() => {
+    const add = "0x3F11b27F323b62B159D2642964fa27C46C841897";
+    if (await canMessage(add)) {
+      const conversation = await startConversation(add, "hi");
+      console.log(conversation)
+    }
+  }
+
   if (error) {
     return "An error occurred while initializing the client";
   }
@@ -55,7 +66,13 @@ function Chat({ userSigner, ethAddress }) {
     return "Awaiting signatures...";
   }
 
-  return "Chats";
+  return (
+    <Container>
+      <Button colorScheme="blue" size="lg" onClick={sendMessage}>
+        Send Message
+      </Button>
+    </Container>
+  );
 }
 
 export default Chat;
