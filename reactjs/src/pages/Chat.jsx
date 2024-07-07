@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
-
 import { useClient, Client } from '@xmtp/react-sdk';
 
 function Chat({ userSigner, ethAddress }) {
   const { client, error, isLoading, initialize } = useClient();
 
-  console.log(client, initialize, userSigner);
-
+  console.log(client);
+  
   useEffect(() => {
     if (userSigner) initXmtp();
   }, [userSigner])
@@ -30,7 +29,8 @@ function Chat({ userSigner, ethAddress }) {
 
   const initXmtp = async () => {
     const options = {  
-      env: "dev"  
+      persistConversations: false,
+      env: "dev",
     };
 
     let keys = loadKeys(ethAddress);  
@@ -41,9 +41,10 @@ function Chat({ userSigner, ethAddress }) {
         skipContactPublishing: true,  
         persistConversations: false,  
       });  
-      console.log(keys);
       storeKeys(ethAddress, keys);
     }
+
+    await initialize({ keys, options, userSigner });
   }
 
   if (error) {
