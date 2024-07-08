@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useClient, useCanMessage, useStartConversation, Client } from '@xmtp/react-sdk';
-import { Button, Container } from '@chakra-ui/react';
+import { Center, Button, Container } from '@chakra-ui/react';
+
+import ChatForm from '../components/ChatForm';
 
 function Chat({ userSigner, ethAddress }) {
   const { client, error, isLoading, initialize } = useClient();
@@ -68,6 +70,9 @@ function Chat({ userSigner, ethAddress }) {
 
   return (
     <Container>
+      <Center>
+        <ChatForm />
+      </Center>
       <Button colorScheme="blue" size="lg" onClick={sendMessage}>
         Send Message
       </Button>
