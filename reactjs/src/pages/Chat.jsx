@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useClient, useCanMessage, useStartConversation, Client } from '@xmtp/react-sdk';
-import { Center, Button, Container } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useClient, useCanMessage, useStartConversation, useConsent, Client } from '@xmtp/react-sdk';
+import { Center, Input, Button, Container } from '@chakra-ui/react';
 
 import ChatForm from '../components/ChatForm';
 
@@ -8,6 +8,9 @@ function Chat({ userSigner, ethAddress }) {
   const { client, error, isLoading, initialize } = useClient();
   const { startConversation } = useStartConversation();
   const { canMessage } = useCanMessage();
+  const { allow } = useConsent();
+
+  const [toAddress, setToAddress] = useState("");
 
   console.log(client);
 
@@ -25,6 +28,15 @@ function Chat({ userSigner, ethAddress }) {
       buildLocalStorageKey(walletAddress),  
       Buffer.from(keys).toString(ENCODING),  
     );  
+  };
+
+  const allowContact = async () => {
+    try {
+      await allow([toAddress]);
+    } catch (error) {
+      console.error(error);
+    }
+    
   };
 
   const loadKeys = (walletAddress) => {  
@@ -70,6 +82,14 @@ function Chat({ userSigner, ethAddress }) {
 
   return (
     <Container>
+      <Input
+        type="text"
+        placeholder="Enter Address to Contact"
+        value={toAddress}
+        onChange={(e) => setToAddress(e.target.value)} />
+      <Button colorScheme="blue" onClick={allowContact}>
+        Allow Contact
+      </Button>
       <Center>
         <ChatForm />
       </Center>
