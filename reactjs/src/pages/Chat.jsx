@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useClient, useCanMessage, useStartConversation, useConsent, Client } from '@xmtp/react-sdk';
+import { useClient, useCanMessage, useStartConversation, useConsent, isValidAddress, Client } from '@xmtp/react-sdk';
 import { Center, Input, Button, Container } from '@chakra-ui/react';
 
 import ChatForm from '../components/ChatForm';
@@ -36,8 +36,15 @@ function Chat({ userSigner, ethAddress }) {
     } catch (error) {
       console.error(error);
     }
-    
   };
+
+  const checkAddress = async () => {
+    if (isValidAddress(toAddress)) {
+      alert("yes");
+    } else {
+      alert("no");
+    }
+  }
 
   const loadKeys = (walletAddress) => {  
     const val = localStorage.getItem(buildLocalStorageKey(walletAddress));  
@@ -87,6 +94,9 @@ function Chat({ userSigner, ethAddress }) {
         placeholder="Enter Address to Contact"
         value={toAddress}
         onChange={(e) => setToAddress(e.target.value)} />
+      <Button colorScheme="blue" onClick={checkAddress}>
+        Check Message
+      </Button>
       <Button colorScheme="blue" onClick={allowContact}>
         Allow Contact
       </Button>
