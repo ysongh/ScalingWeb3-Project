@@ -6,7 +6,7 @@ import ChatForm from '../components/ChatForm';
 
 function Chat({ userSigner, ethAddress }) {
   const { client, error, isLoading, initialize } = useClient();
-  const { startConversation } = useStartConversation();
+  const { startConversation, newConversation } = useStartConversation();
   const { canMessage } = useCanMessage();
   const { allow } = useConsent();
 
@@ -74,6 +74,7 @@ function Chat({ userSigner, ethAddress }) {
   const sendMessage = async() => {
     const add = "0x3F11b27F323b62B159D2642964fa27C46C841897";
     if (await canMessage(add)) {
+      const newConversation = await newConversation("0x3F11b27F323b62B159D2642964fa27C46C841897");
       const conversation = await startConversation(add, "hi");
       console.log(conversation)
     }
