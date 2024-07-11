@@ -18,7 +18,6 @@ function App() {
           ethAddress={ethAddress}
           setETHAddress={setETHAddress}
           setUserSigner={setUserSigner} />
-        <w3m-button />
         <Routes>
           <Route
             path="/test"

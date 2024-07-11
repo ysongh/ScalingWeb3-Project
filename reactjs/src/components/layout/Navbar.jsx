@@ -29,6 +29,7 @@ function Navbar({ ethAddress, setETHAddress, setUserSigner }) {
           <Button onClick={connectMetamask}>
             {ethAddress ? ethAddress.slice(0, 5) + "..." + ethAddress.slice(37, 42) : 'Connect Wallet'}
           </Button>
+          <w3m-button />
         </Flex>
       </Container>
     </Box>
