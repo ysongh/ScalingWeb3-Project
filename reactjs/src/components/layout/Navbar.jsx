@@ -1,8 +1,11 @@
 import { Link as ReactLink } from 'react-router-dom';
+import { useWeb3ModalAccount } from '@web3modal/ethers5/react';
 import { ethers } from 'ethers';
 import { Container, Box, Flex, Heading, Spacer, Button, Link } from '@chakra-ui/react';
 
 function Navbar({ ethAddress, setETHAddress, setUserSigner }) {
+  const { isConnected } = useWeb3ModalAccount();
+
   const connectMetamask = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     setETHAddress(accounts[0]);
@@ -26,9 +29,9 @@ function Navbar({ ethAddress, setETHAddress, setUserSigner }) {
           <Link as={ReactLink} to="/chat">Chat</Link>
           <Link as={ReactLink} to="/attestations">Attestations</Link>
           <Spacer />
-          <Button onClick={connectMetamask}>
+          {!isConnected && <Button onClick={connectMetamask}>
             {ethAddress ? ethAddress.slice(0, 5) + "..." + ethAddress.slice(37, 42) : 'Connect Wallet'}
-          </Button>
+          </Button>}
           <w3m-button />
         </Flex>
       </Container>
