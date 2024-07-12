@@ -18,6 +18,14 @@ const mainnet = {
   rpcUrl: 'https://cloudflare-eth.com'
 }
 
+const arbitrumSepolia = {
+  chainId: 421614,
+  name: 'Arbitrum Sepolia',
+  currency: 'ETH',
+  explorerUrl: 'https://sepolia-explorer.arbitrum.io',
+  rpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc'
+}
+
 const metadata = {
   name: 'Project',
   description: 'AppKit Example',
@@ -39,7 +47,7 @@ const ethersConfig = defaultConfig({
 
 createWeb3Modal({
   ethersConfig,
-  chains: [mainnet],
+  chains: [mainnet, arbitrumSepolia],
   projectId,
   enableAnalytics: true // Optional - defaults to your Cloud configuration
 })
