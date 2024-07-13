@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useClient, useCanMessage, useStartConversation, useConsent, isValidAddress, Client } from '@xmtp/react-sdk';
 import { useWeb3ModalAccount } from '@web3modal/ethers5/react'
 import { Center, Input, Button, Container } from '@chakra-ui/react';
+import { ethers } from 'ethers';
 
 import ChatForm from '../components/ChatForm';
 
-function Chat({ userSigner }) {
+function Chat() {
   const { client, error, isLoading, initialize } = useClient();
   const { address } = useWeb3ModalAccount();
   const { startConversation, newConversation } = useStartConversation();
@@ -13,12 +14,20 @@ function Chat({ userSigner }) {
   const { allow } = useConsent();
 
   const [toAddress, setToAddress] = useState("");
+  const [userSigner, setUserSigner] = useState(null);
 
   console.log(client);
 
   useEffect(() => {
     if (userSigner) initXmtp();
-  }, [userSigner, address])
+  }, [userSigner])
+
+  const connectWallet = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    console.log(signer);
+    setUserSigner(signer);
+  }
 
   const ENCODING = "binary";
 
@@ -92,6 +101,9 @@ function Chat({ userSigner }) {
 
   return (
     <Container>
+       {!userSigner && <Button onClick={connectWallet}>
+        Connect Wallet
+      </Button>}
       <Input
         type="text"
         placeholder="Enter Address to Contact"

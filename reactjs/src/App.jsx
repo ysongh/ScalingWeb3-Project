@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
@@ -8,12 +7,10 @@ import Attestations from './pages/Attestations';
 import Chat from './pages/Chat';
 
 function App() {
-  const [userSigner, setUserSigner] = useState(null);
-
   return (
     <ChakraProvider>
       <HashRouter>
-        <Navbar setUserSigner={setUserSigner} />
+        <Navbar />
         <Routes>
           <Route
             path="/test"
@@ -22,7 +19,7 @@ function App() {
           <Route
             path="/chat"
             element={
-              <Chat userSigner={userSigner} />} />
+              <Chat />} />
           <Route
             path="/attestations"
             element={

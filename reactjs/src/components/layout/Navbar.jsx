@@ -1,17 +1,7 @@
 import { Link as ReactLink } from 'react-router-dom';
-import { ethers } from 'ethers';
 import { Container, Box, Flex, Heading, Spacer, Link } from '@chakra-ui/react';
 
-function Navbar({ setUserSigner }) {
-  const connectMetamask = async () => {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    console.log(signer);
-    setUserSigner(signer);
-  }
-  
+function Navbar() {  
   return (
     <Box p={2}>
       <Container maxW='1100px'>
