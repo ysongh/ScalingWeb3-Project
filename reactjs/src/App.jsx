@@ -8,16 +8,12 @@ import Attestations from './pages/Attestations';
 import Chat from './pages/Chat';
 
 function App() {
-  const [ethAddress, setETHAddress] = useState('');
   const [userSigner, setUserSigner] = useState(null);
 
   return (
     <ChakraProvider>
       <HashRouter>
-        <Navbar
-          ethAddress={ethAddress}
-          setETHAddress={setETHAddress}
-          setUserSigner={setUserSigner} />
+        <Navbar setUserSigner={setUserSigner} />
         <Routes>
           <Route
             path="/test"
@@ -26,7 +22,7 @@ function App() {
           <Route
             path="/chat"
             element={
-              <Chat userSigner={userSigner} ethAddress={ethAddress} />} />
+              <Chat userSigner={userSigner} />} />
           <Route
             path="/attestations"
             element={

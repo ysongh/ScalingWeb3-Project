@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useClient, useCanMessage, useStartConversation, useConsent, isValidAddress, Client } from '@xmtp/react-sdk';
+import { useWeb3ModalAccount } from '@web3modal/ethers5/react'
 import { Center, Input, Button, Container } from '@chakra-ui/react';
 
 import ChatForm from '../components/ChatForm';
 
-function Chat({ userSigner, ethAddress }) {
+function Chat({ userSigner }) {
   const { client, error, isLoading, initialize } = useClient();
+  const { address } = useWeb3ModalAccount();
   const { startConversation, newConversation } = useStartConversation();
   const { canMessage } = useCanMessage();
   const { allow } = useConsent();
@@ -16,7 +18,7 @@ function Chat({ userSigner, ethAddress }) {
 
   useEffect(() => {
     if (userSigner) initXmtp();
-  }, [userSigner])
+  }, [userSigner, address])
 
   const ENCODING = "binary";
 
@@ -57,7 +59,7 @@ function Chat({ userSigner, ethAddress }) {
       env: "dev",
     };
 
-    let keys = loadKeys(ethAddress);  
+    let keys = loadKeys(address);  
     
     if (!keys) {
       keys = await Client.getKeys(userSigner, {  
@@ -65,7 +67,7 @@ function Chat({ userSigner, ethAddress }) {
         skipContactPublishing: true,  
         persistConversations: false,  
       });  
-      storeKeys(ethAddress, keys);
+      storeKeys(address, keys);
     }
 
     await initialize({ keys, options, userSigner });
