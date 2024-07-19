@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
+import { useWeb3ModalAccount } from '@web3modal/ethers5/react'
+import { useClient } from "@xmtp/react-sdk";
 
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
@@ -7,6 +10,13 @@ import Attestations from './pages/Attestations';
 import Chat from './pages/Chat';
 
 function App() {
+  const { address } = useWeb3ModalAccount();
+  const { disconnect } = useClient();
+
+  useEffect(() => {
+    void disconnect();
+  }, [address]);
+
   return (
     <ChakraProvider>
       <HashRouter>
