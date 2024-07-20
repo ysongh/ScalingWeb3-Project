@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useClient, useCanMessage, useStartConversation, useConsent, isValidAddress, Client } from '@xmtp/react-sdk';
 import { useWeb3ModalAccount } from '@web3modal/ethers5/react'
 import { Center, Input, Button, Container } from '@chakra-ui/react';
@@ -87,11 +87,12 @@ function Chat() {
   }
 
   const sendMessage = async() => {
-    const add = "0x3F11b27F323b62B159D2642964fa27C46C841897";
-    if (await canMessage(add)) {
-      const newConversation = await newConversation("0x3F11b27F323b62B159D2642964fa27C46C841897");
-      const conversation = await startConversation(add, "hi");
-      console.log(conversation)
+    if (await canMessage(toAddress)) {
+      const conversation = await startConversation(toAddress, "hi");
+      console.log(conversation);
+    }
+    else {
+      alert("Cannot message this address");
     }
   }
 
