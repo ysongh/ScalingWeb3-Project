@@ -11,7 +11,7 @@ function Chat() {
   const { address } = useWeb3ModalAccount();
   const { startConversation, newConversation } = useStartConversation();
   const { canMessage } = useCanMessage();
-  const { allow } = useConsent();
+  const { allow, loadConsentList } = useConsent();
 
   const [toAddress, setToAddress] = useState("");
   const [userSigner, setUserSigner] = useState(null);
@@ -21,6 +21,10 @@ function Chat() {
   useEffect(() => {
     if (userSigner) initXmtp();
   }, [userSigner])
+
+  useEffect(() => {
+    void loadConsentList();
+  }, []);
 
   const connectWallet = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
