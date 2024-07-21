@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useClient, useCanMessage, useStartConversation, useConsent, isValidAddress, Client } from '@xmtp/react-sdk';
+import { useClient, useCanMessage, useStartConversation, useConversations, useConsent, isValidAddress, Client } from '@xmtp/react-sdk';
 import { useWeb3ModalAccount } from '@web3modal/ethers5/react'
-import { Center, Input, Button, Container } from '@chakra-ui/react';
+import { Center, Input, Button, Heading, Container } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 
 import ChatForm from '../components/ChatForm';
@@ -12,11 +12,12 @@ function Chat() {
   const { startConversation, newConversation } = useStartConversation();
   const { canMessage } = useCanMessage();
   const { allow, loadConsentList } = useConsent();
+  const { conversations } = useConversations();
 
   const [toAddress, setToAddress] = useState("");
   const [userSigner, setUserSigner] = useState(null);
 
-  console.log(client);
+  console.log(conversations);
 
   useEffect(() => {
     if (userSigner) initXmtp();
@@ -126,6 +127,14 @@ function Chat() {
       <Button colorScheme="blue" size="lg" onClick={sendMessage}>
         Send Message
       </Button>
+      <Heading mt="2">
+        List of existing conversations
+      </Heading>
+      {conversations?.map(c => (
+        <div key={c.id}>
+          <p>{c.peerAddress}</p>
+        </div>
+      ))}
     </Container>
   );
 }
