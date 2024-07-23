@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   Button,
   FormControl,
@@ -11,10 +11,13 @@ import {
   Heading,
 } from '@chakra-ui/react';
 
-const ChatForm = () => {
-  const handleSubmit = (event) => {
+const ChatForm = ({ sendMessage }) => {
+  const [text, setText] = useState("");
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    
+    await sendMessage(text);
+    setText("");
   };
 
   return (
@@ -31,7 +34,7 @@ const ChatForm = () => {
             </FormControl>
             <FormControl>
               <FormLabel>Message</FormLabel>
-              <Input type="text" placeholder="Enter your message" />
+              <Input type="text" placeholder="Enter your message" value={text} onChange={e => setText(e.target.value)} />
             </FormControl>
             <Button type="submit" colorScheme="blue" width="100%">
               Submit

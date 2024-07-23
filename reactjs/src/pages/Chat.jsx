@@ -88,9 +88,9 @@ function Chat() {
     await initialize({ keys, options, userSigner });
   }
 
-  const sendMessage = async() => {
+  const sendMessage = async(text) => {
     if (await canMessage(toAddress)) {
-      const conversation = await startConversation(toAddress, "hi");
+      const conversation = await startConversation(toAddress, text);
       console.log(conversation);
     }
     else {
@@ -123,7 +123,7 @@ function Chat() {
         Allow Contact
       </Button>
       <Center>
-        <ChatForm />
+        <ChatForm sendMessage={sendMessage} />
       </Center>
       <Button colorScheme="blue" size="lg" onClick={sendMessage}>
         Send Message

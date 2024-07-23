@@ -6,7 +6,7 @@ function ConversationCard({ topic }) {
   console.log(lastMessage);
   return (
     <div>
-      <p>{lastMessage.content}</p>
+      <p>{lastMessage?.content}</p>
     </div>
   )
 }
