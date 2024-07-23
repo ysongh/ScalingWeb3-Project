@@ -5,6 +5,7 @@ import { Center, Input, Button, Heading, Container } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 
 import ChatForm from '../components/ChatForm';
+import ConversationCard from '../components/ConversationCard';
 
 function Chat() {
   const { client, error, isLoading, initialize } = useClient();
@@ -133,8 +134,10 @@ function Chat() {
       {conversations?.map(c => (
         <div key={c.id}>
           <p>{c.peerAddress}</p>
+          <ConversationCard topic={c.topic} />
         </div>
       ))}
+      
     </Container>
   );
 }
