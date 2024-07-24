@@ -10,15 +10,34 @@ import {
   CardHeader,
   Heading,
 } from '@chakra-ui/react';
+import { isValidAddress, useConsent } from '@xmtp/react-sdk';
 
 const ChatForm = ({ sendMessage }) => {
   const [toAddress, setToAddress] = useState("");
   const [text, setText] = useState("");
 
+  const { allow } = useConsent();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     await sendMessage(toAddress, text);
     setText("");
+  };
+
+  const checkAddress = async () => {
+    if (isValidAddress(toAddress)) {
+      alert("yes");
+    } else {
+      alert("no");
+    }
+  }
+
+  const allowContact = async () => {
+    try {
+      await allow([toAddress]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -42,6 +61,12 @@ const ChatForm = ({ sendMessage }) => {
             </Button>
           </VStack>
         </form>
+        <Button colorScheme="blue" onClick={checkAddress} mt="3">
+          Check Message
+        </Button>
+        <Button colorScheme="blue" onClick={allowContact} mt="3">
+          Allow Contact
+        </Button>
       </CardBody>
     </Card>
   );

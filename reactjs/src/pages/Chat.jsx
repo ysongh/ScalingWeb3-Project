@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useClient, useCanMessage, useStartConversation, useConversations, useConsent, isValidAddress, Client } from '@xmtp/react-sdk';
+import { useClient, useCanMessage, useStartConversation, useConversations, useConsent, Client } from '@xmtp/react-sdk';
 import { useWeb3ModalAccount } from '@web3modal/ethers5/react'
-import { Center, Input, Button, Heading, Container } from '@chakra-ui/react';
+import { Center, Button, Heading, Container } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 
 import ChatForm from '../components/ChatForm';
@@ -12,10 +12,9 @@ function Chat() {
   const { address } = useWeb3ModalAccount();
   const { startConversation, newConversation } = useStartConversation();
   const { canMessage } = useCanMessage();
-  const { allow, loadConsentList } = useConsent();
+  const { loadConsentList } = useConsent();
   const { conversations } = useConversations();
 
-  const [toAddress, setToAddress] = useState("");
   const [userSigner, setUserSigner] = useState(null);
 
   console.log(conversations);
@@ -46,22 +45,6 @@ function Chat() {
       Buffer.from(keys).toString(ENCODING),  
     );  
   };
-
-  const allowContact = async () => {
-    try {
-      await allow([toAddress]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const checkAddress = async () => {
-    if (isValidAddress(toAddress)) {
-      alert("yes");
-    } else {
-      alert("no");
-    }
-  }
 
   const loadKeys = (walletAddress) => {  
     const val = localStorage.getItem(buildLocalStorageKey(walletAddress));  
@@ -111,17 +94,7 @@ function Chat() {
        {!userSigner && <Button onClick={connectWallet}>
         Connect Wallet
       </Button>}
-      <Input
-        type="text"
-        placeholder="Enter Address to Contact"
-        value={toAddress}
-        onChange={(e) => setToAddress(e.target.value)} />
-      <Button colorScheme="blue" onClick={checkAddress}>
-        Check Message
-      </Button>
-      <Button colorScheme="blue" onClick={allowContact}>
-        Allow Contact
-      </Button>
+     
       <Center>
         <ChatForm sendMessage={sendMessage} />
       </Center>
