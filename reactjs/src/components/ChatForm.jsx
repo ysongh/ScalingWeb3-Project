@@ -12,11 +12,12 @@ import {
 } from '@chakra-ui/react';
 
 const ChatForm = ({ sendMessage }) => {
+  const [toAddress, setToAddress] = useState("");
   const [text, setText] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await sendMessage(text);
+    await sendMessage(toAddress, text);
     setText("");
   };
 
@@ -29,8 +30,8 @@ const ChatForm = ({ sendMessage }) => {
         <form onSubmit={handleSubmit}>
           <VStack spacing={4}>
             <FormControl isRequired>
-              <FormLabel>Name</FormLabel>
-              <Input type="text" placeholder="Enter your name" />
+              <FormLabel>Address</FormLabel>
+              <Input type="text" placeholder="Enter your address 0x..."value={toAddress} onChange={e => setToAddress(e.target.value)} />
             </FormControl>
             <FormControl>
               <FormLabel>Message</FormLabel>

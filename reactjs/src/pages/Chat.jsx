@@ -88,9 +88,9 @@ function Chat() {
     await initialize({ keys, options, userSigner });
   }
 
-  const sendMessage = async(text) => {
-    if (await canMessage(toAddress)) {
-      const conversation = await startConversation(toAddress, text);
+  const sendMessage = async(address, text) => {
+    if (await canMessage(address)) {
+      const conversation = await startConversation(address, text);
       console.log(conversation);
     }
     else {
