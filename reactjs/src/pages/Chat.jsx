@@ -104,7 +104,7 @@ function Chat() {
       {conversations?.map(c => (
         <div key={c.id}>
           <p>{c.peerAddress}</p>
-          <ConversationCard topic={c.topic} />
+          <ConversationCard topic={c.topic} conversation={c} />
         </div>
       ))}
       
