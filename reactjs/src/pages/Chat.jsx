@@ -98,9 +98,6 @@ function Chat() {
       <Center>
         <ChatForm sendMessage={sendMessage} />
       </Center>
-      <Button colorScheme="blue" size="lg" onClick={sendMessage}>
-        Send Message
-      </Button>
       <Heading mt="2">
         List of existing conversations
       </Heading>
