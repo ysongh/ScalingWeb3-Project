@@ -8,6 +8,7 @@ import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
 import Attestations from './pages/Attestations';
 import Chat from './pages/Chat';
+import Chats from './pages/Chats';
 
 function App() {
   const { address } = useWeb3ModalAccount();
@@ -30,6 +31,10 @@ function App() {
             path="/chat"
             element={
               <Chat />} />
+          <Route
+            path="/chats"
+            element={
+              <Chats />} />
           <Route
             path="/attestations"
             element={
