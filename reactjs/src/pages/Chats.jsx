@@ -9,10 +9,11 @@ import {
   IconButton,
   Avatar,
 } from '@chakra-ui/react';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 const Chats = () => {
   return (
-    <Flex height="100vh">
+    <Flex height="88vh">
       {/* Chat List */}
       <Box width="300px" borderRight="1px" borderColor="gray.200" p={4}>
         <VStack align="stretch" spacing={4}>
@@ -41,7 +42,7 @@ const Chats = () => {
         <Box p={4} borderTop="1px" borderColor="gray.200">
           <HStack>
             <Input placeholder="Type a message..." />
-            <IconButton colorScheme="blue" aria-label="Send message" />
+            <IconButton icon={<ArrowForwardIcon />} colorScheme="blue" aria-label="Send message" />
           </HStack>
         </Box>
       </Flex>
