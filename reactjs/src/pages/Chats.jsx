@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -12,9 +12,20 @@ import {
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { ethers } from 'ethers';
+import { useWeb3ModalAccount } from '@web3modal/ethers5/react';
+import { useClient } from '@xmtp/react-sdk';
+
+import { initXmtp } from '../utils/XMTP';
 
 const Chats = () => {
+  const { address } = useWeb3ModalAccount();
+  const { client, error, isLoading, initialize } = useClient();
+
   const [userSigner, setUserSigner] = useState(null);
+
+  useEffect(() => {
+    if (userSigner) initXmtp(userSigner, address, initialize);
+  }, [userSigner])
 
   const connectWallet = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
