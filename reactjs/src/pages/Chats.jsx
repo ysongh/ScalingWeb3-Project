@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   Box,
   Flex,
@@ -7,46 +7,65 @@ import {
   Text,
   Input,
   IconButton,
+  Button,
   Avatar,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { ethers } from 'ethers';
 
 const Chats = () => {
+  const [userSigner, setUserSigner] = useState(null);
+
+  const connectWallet = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    console.log(signer);
+    setUserSigner(signer);
+  }
+
   return (
-    <Flex height="88vh">
-      {/* Chat List */}
-      <Box width="300px" borderRight="1px" borderColor="gray.200" p={4}>
-        <VStack align="stretch" spacing={4}>
-          <Input placeholder="Search chats..." />
-          <ChatListItem name="John Doe" lastMessage="Hey, how are you?" />
-          <ChatListItem name="Jane Smith" lastMessage="See you later!" />
-          <ChatListItem name="Bob Johnson" lastMessage="Thanks for your help." />
-        </VStack>
-      </Box>
+    <>
+      {!userSigner ? (
+        <Button onClick={connectWallet}>
+          Connect Wallet
+        </Button>
+      ) : (
+        <Flex height="88vh">
+          {/* Chat List */}
+          <Box width="300px" borderRight="1px" borderColor="gray.200" p={4}>
+            <VStack align="stretch" spacing={4}>
+              <Input placeholder="Search chats..." />
+              <ChatListItem name="John Doe" lastMessage="Hey, how are you?" />
+              <ChatListItem name="Jane Smith" lastMessage="See you later!" />
+              <ChatListItem name="Bob Johnson" lastMessage="Thanks for your help." />
+            </VStack>
+          </Box>
 
-      {/* Chat Window */}
-      <Flex flex={1} flexDirection="column">
-        {/* Chat Header */}
-        <Box p={4} borderBottom="1px" borderColor="gray.200">
-          <Text fontWeight="bold">John Doe</Text>
-        </Box>
+          {/* Chat Window */}
+          <Flex flex={1} flexDirection="column">
+            {/* Chat Header */}
+            <Box p={4} borderBottom="1px" borderColor="gray.200">
+              <Text fontWeight="bold">John Doe</Text>
+            </Box>
 
-        {/* Messages Area */}
-        <VStack flex={1} overflowY="auto" p={4} spacing={4} alignItems="flex-start">
-          <Message text="Hey, how are you?" isUser={false} />
-          <Message text="I'm good, thanks! How about you?" isUser={true} />
-          <Message text="Doing well. Did you finish the project?" isUser={false} />
-        </VStack>
+            {/* Messages Area */}
+            <VStack flex={1} overflowY="auto" p={4} spacing={4} alignItems="flex-start">
+              <Message text="Hey, how are you?" isUser={false} />
+              <Message text="I'm good, thanks! How about you?" isUser={true} />
+              <Message text="Doing well. Did you finish the project?" isUser={false} />
+            </VStack>
 
-        {/* Input Area */}
-        <Box p={4} borderTop="1px" borderColor="gray.200">
-          <HStack>
-            <Input placeholder="Type a message..." />
-            <IconButton icon={<ArrowForwardIcon />} colorScheme="blue" aria-label="Send message" />
-          </HStack>
-        </Box>
-      </Flex>
-    </Flex>
+            {/* Input Area */}
+            <Box p={4} borderTop="1px" borderColor="gray.200">
+              <HStack>
+                <Input placeholder="Type a message..." />
+                <IconButton icon={<ArrowForwardIcon />} colorScheme="blue" aria-label="Send message" />
+              </HStack>
+            </Box>
+          </Flex>
+        </Flex>
+      )}
+    </>
   );
 };
 
