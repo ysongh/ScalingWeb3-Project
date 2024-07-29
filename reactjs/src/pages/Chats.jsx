@@ -8,7 +8,6 @@ import {
   Input,
   IconButton,
   Button,
-  Avatar,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { ethers } from 'ethers';
@@ -16,6 +15,7 @@ import { useWeb3ModalAccount } from '@web3modal/ethers5/react';
 import { useClient, useConsent, useConversations } from '@xmtp/react-sdk';
 
 import { initXmtp } from '../utils/XMTP';
+import ChatListItem from '../components/ChatListItem';
 
 const Chats = () => {
   const { address } = useWeb3ModalAccount();
@@ -53,7 +53,7 @@ const Chats = () => {
             <VStack align="stretch" spacing={4}>
               <Input placeholder="Search chats..." />
               {conversations?.map(c => (
-                <ChatListItem key={c.id} name={c.peerAddress} lastMessage="Hey, how are you?" />
+                <ChatListItem key={c.id} topic={c.topic} conversation={c} />
               ))}
             </VStack>
           </Box>
@@ -85,18 +85,6 @@ const Chats = () => {
     </>
   );
 };
-
-const ChatListItem = ({ name, lastMessage }) => (
-  <HStack spacing={3}>
-    <Avatar name={name} size="sm" />
-    <Box flex={1}>
-      <Text fontWeight="bold">{name}</Text>
-      <Text fontSize="sm" color="gray.500" noOfLines={1}>
-        {lastMessage}
-      </Text>
-    </Box>
-  </HStack>
-);
 
 const Message = ({ text, isUser }) => (
   <Box
