@@ -13,19 +13,25 @@ import {
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { ethers } from 'ethers';
 import { useWeb3ModalAccount } from '@web3modal/ethers5/react';
-import { useClient } from '@xmtp/react-sdk';
+import { useClient, useConsent, useConversations } from '@xmtp/react-sdk';
 
 import { initXmtp } from '../utils/XMTP';
 
 const Chats = () => {
   const { address } = useWeb3ModalAccount();
   const { client, error, isLoading, initialize } = useClient();
+  const { loadConsentList } = useConsent();
+  const { conversations } = useConversations();
 
   const [userSigner, setUserSigner] = useState(null);
 
   useEffect(() => {
     if (userSigner) initXmtp(userSigner, address, initialize);
   }, [userSigner])
+
+  useEffect(() => {
+    void loadConsentList();
+  }, []);
 
   const connectWallet = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -46,9 +52,9 @@ const Chats = () => {
           <Box width="300px" borderRight="1px" borderColor="gray.200" p={4}>
             <VStack align="stretch" spacing={4}>
               <Input placeholder="Search chats..." />
-              <ChatListItem name="John Doe" lastMessage="Hey, how are you?" />
-              <ChatListItem name="Jane Smith" lastMessage="See you later!" />
-              <ChatListItem name="Bob Johnson" lastMessage="Thanks for your help." />
+              {conversations?.map(c => (
+                <ChatListItem key={c.id} name={c.peerAddress} lastMessage="Hey, how are you?" />
+              ))}
             </VStack>
           </Box>
 
