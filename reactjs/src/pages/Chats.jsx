@@ -16,6 +16,7 @@ import { useClient, useConsent, useConversations } from '@xmtp/react-sdk';
 
 import { initXmtp } from '../utils/XMTP';
 import ChatListItem from '../components/ChatListItem';
+import MessagesArea from '../components/MessagesArea';
 
 const Chats = () => {
   const { address } = useWeb3ModalAccount();
@@ -66,11 +67,7 @@ const Chats = () => {
             </Box>
 
             {/* Messages Area */}
-            <VStack flex={1} overflowY="auto" p={4} spacing={4} alignItems="flex-start">
-              <Message text="Hey, how are you?" isUser={false} />
-              <Message text="I'm good, thanks! How about you?" isUser={true} />
-              <Message text="Doing well. Did you finish the project?" isUser={false} />
-            </VStack>
+            <MessagesArea />
 
             {/* Input Area */}
             <Box p={4} borderTop="1px" borderColor="gray.200">
@@ -85,19 +82,5 @@ const Chats = () => {
     </>
   );
 };
-
-const Message = ({ text, isUser }) => (
-  <Box
-    alignSelf={isUser ? 'flex-end' : 'flex-start'}
-    bg={isUser ? 'blue.500' : 'gray.100'}
-    color={isUser ? 'white' : 'black'}
-    borderRadius="lg"
-    px={3}
-    py={2}
-    maxWidth="70%"
-  >
-    <Text>{text}</Text>
-  </Box>
-);
 
 export default Chats;
