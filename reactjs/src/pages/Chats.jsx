@@ -25,6 +25,7 @@ const Chats = () => {
   const { conversations } = useConversations();
 
   const [userSigner, setUserSigner] = useState(null);
+  const [selectedConversation, setSelectedConversation] = useState(null);
 
   useEffect(() => {
     if (userSigner) initXmtp(userSigner, address, initialize);
@@ -54,7 +55,7 @@ const Chats = () => {
             <VStack align="stretch" spacing={4}>
               <Input placeholder="Search chats..." />
               {conversations?.map(c => (
-                <ChatListItem key={c.id} topic={c.topic} conversation={c} />
+                <ChatListItem key={c.id} topic={c.topic} conversation={c} setSelectedConversation={setSelectedConversation} />
               ))}
             </VStack>
           </Box>
@@ -67,7 +68,7 @@ const Chats = () => {
             </Box>
 
             {/* Messages Area */}
-            <MessagesArea />
+            <MessagesArea selectedConversation={selectedConversation} />
 
             {/* Input Area */}
             <Box p={4} borderTop="1px" borderColor="gray.200">

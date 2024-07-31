@@ -2,12 +2,12 @@ import React from 'react';
 import { Avatar, Box, HStack, Text } from '@chakra-ui/react';
 import { useLastMessage } from "@xmtp/react-sdk";
 
-function ChatListItem({ topic, conversation }) {
+function ChatListItem({ topic, conversation, setSelectedConversation }) {
   const lastMessage = useLastMessage(topic);
 
   console.log(lastMessage, conversation);
   return (
-    <HStack spacing={3}>
+    <HStack spacing={3} onClick={() => setSelectedConversation(conversation)}>
       <Avatar name={conversation?.walletAddress} size="sm" />
       <Box flex={1}>
         <Text fontWeight="bold">
