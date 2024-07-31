@@ -68,7 +68,7 @@ const Chats = () => {
             </Box>
 
             {/* Messages Area */}
-            <MessagesArea selectedConversation={selectedConversation} />
+            {selectedConversation && <MessagesArea address={address} selectedConversation={selectedConversation} />}
 
             {/* Input Area */}
             <Box p={4} borderTop="1px" borderColor="gray.200">

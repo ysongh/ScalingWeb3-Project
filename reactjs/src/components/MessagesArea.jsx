@@ -2,17 +2,15 @@ import React from 'react';
 import { VStack, Box, Text } from '@chakra-ui/react';
 import { useMessages } from '@xmtp/react-sdk';
 
-function MessagesArea({ selectedConversation }) {
+function MessagesArea({ address, selectedConversation }) {
   const { messages } = useMessages(selectedConversation);
   console.log(messages);
 
   return (
     <VStack flex={1} overflowY="auto" p={4} spacing={4} alignItems="flex-start">
       {messages?.map(m => (
-        <Message key={m.id} text={m.content} isUser={false} />
+        <Message key={m.id} text={m.content} isUser={address === m.senderAddress} />
       ))}
-     
-      <Message text="I'm good, thanks! How about you?" isUser={true} />
     </VStack>
   );
 };
