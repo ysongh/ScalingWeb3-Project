@@ -64,7 +64,7 @@ const Chats = () => {
           <Flex flex={1} flexDirection="column">
             {/* Chat Header */}
             <Box p={4} borderBottom="1px" borderColor="gray.200">
-              <Text fontWeight="bold">John Doe</Text>
+              <Text fontWeight="bold">{selectedConversation?.peerAddress}</Text>
             </Box>
 
             {/* Messages Area */}
