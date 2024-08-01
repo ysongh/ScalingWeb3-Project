@@ -12,7 +12,7 @@ import {
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { ethers } from 'ethers';
 import { useWeb3ModalAccount } from '@web3modal/ethers5/react';
-import { useClient, useConsent, useConversations } from '@xmtp/react-sdk';
+import { useCanMessage, useClient, useConsent, useConversations, useStartConversation } from '@xmtp/react-sdk';
 
 import { initXmtp } from '../utils/XMTP';
 import ChatListItem from '../components/ChatListItem';
@@ -23,9 +23,12 @@ const Chats = () => {
   const { client, error, isLoading, initialize } = useClient();
   const { loadConsentList } = useConsent();
   const { conversations } = useConversations();
+  const { canMessage } = useCanMessage();
+  const { startConversation } = useStartConversation();
 
   const [userSigner, setUserSigner] = useState(null);
   const [selectedConversation, setSelectedConversation] = useState(null);
+  const [text, setText] = useState("");
 
   useEffect(() => {
     if (userSigner) initXmtp(userSigner, address, initialize);
@@ -40,6 +43,16 @@ const Chats = () => {
     const signer = provider.getSigner();
     console.log(signer);
     setUserSigner(signer);
+  }
+
+  const sendMessage = async() => {
+    if (await canMessage(selectedConversation?.peerAddress)) {
+      const conversation = await startConversation(selectedConversation?.peerAddress, text);
+      console.log(conversation);
+    }
+    else {
+      alert("Cannot message this address");
+    }
   }
 
   return (
@@ -73,8 +86,12 @@ const Chats = () => {
             {/* Input Area */}
             <Box p={4} borderTop="1px" borderColor="gray.200">
               <HStack>
-                <Input placeholder="Type a message..." />
-                <IconButton icon={<ArrowForwardIcon />} colorScheme="blue" aria-label="Send message" />
+                <Input placeholder="Type a message..." value={text} onChange={e => setText(e.target.value)} />
+                <IconButton
+                  icon={<ArrowForwardIcon />}
+                  colorScheme="blue"
+                  aria-label="Send message"
+                  onClick={sendMessage} />
               </HStack>
             </Box>
           </Flex>
