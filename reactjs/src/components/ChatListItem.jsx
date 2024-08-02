@@ -7,7 +7,7 @@ function ChatListItem({ topic, conversation, setSelectedConversation }) {
 
   console.log(lastMessage, conversation);
   return (
-    <HStack spacing={3} onClick={() => setSelectedConversation(conversation)}>
+    <HStack spacing={3} onClick={() => setSelectedConversation(conversation)} cursor="pointer">
       <Avatar name={conversation?.walletAddress} size="sm" />
       <Box flex={1}>
         <Text fontWeight="bold">
