@@ -11,7 +11,7 @@ function ChatListItem({ topic, conversation, setSelectedConversation }) {
       <Avatar name={conversation?.walletAddress} size="sm" />
       <Box flex={1}>
         <Text fontWeight="bold">
-          {conversation?.walletAddress && conversation?.walletAddress.slice(0, 5) + "..." + conversation?.walletAddress.slice(37, 42)}
+          {conversation?.peerAddress && conversation?.peerAddress.slice(0, 5) + "..." + conversation?.peerAddress.slice(37, 42)}
         </Text>
         <Text fontSize="sm" color="gray.500" noOfLines={1}>
           {lastMessage?.content}
