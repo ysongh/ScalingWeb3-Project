@@ -5,13 +5,14 @@ import {
   EvmChains,
   IndexService,
 } from '@ethsign/sp-sdk';
-import { Container, Button } from '@chakra-ui/react';
+import { Container, InputGroup, Input, InputRightElement, Text, Button } from '@chakra-ui/react';
 
 import TableList from '../components/TableList';
 
 function Attestations() {
   const [ethsignClient, setethsignClient] = useState(null);
   const [schemaList, setschemaList] = useState([]);
+  const [search, setSearch] = useState("");
 
   const loadClient = () => {
     const client = new SignProtocolClient(SpMode.OnChain, {
@@ -51,6 +52,12 @@ function Attestations() {
   return (
     <Container maxW='1100px'>
       <h1>Attestations</h1>
+      <InputGroup bg='white' mt='4' mb="2">
+        <Input placeholder='Search' value={search} onChange={(e) => setSearch(e.target.value)}/>
+        <InputRightElement>
+          <Text mr="2" color="blue" fontWeight="bold">Find</Text>
+        </InputRightElement>
+      </InputGroup>
       <Button onClick={loadClient}>
         Load Client
       </Button>
