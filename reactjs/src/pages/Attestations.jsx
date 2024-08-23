@@ -5,7 +5,7 @@ import {
   EvmChains,
   IndexService,
 } from '@ethsign/sp-sdk';
-import { Button } from '@chakra-ui/react';
+import { Container, Button } from '@chakra-ui/react';
 
 import TableList from '../components/TableList';
 
@@ -49,7 +49,7 @@ function Attestations() {
   }
 
   return (
-    <div>
+    <Container maxW='1100px'>
       <h1>Attestations</h1>
       <Button onClick={loadClient}>
         Load Client
@@ -64,7 +64,7 @@ function Attestations() {
         Get Schema List From Index Service
       </Button>
       <TableList schemaList={schemaList} />
-    </div>
+    </Container>
   )
 }
 
