@@ -6,6 +6,7 @@ import {
   IndexService,
 } from '@ethsign/sp-sdk';
 import { Container, InputGroup, Input, InputRightElement, Text, Button } from '@chakra-ui/react';
+import { SearchIcon } from "@chakra-ui/icons";
 
 import TableList from '../components/TableList';
 
@@ -55,7 +56,7 @@ function Attestations() {
       <InputGroup bg='white' mt='4' mb="2">
         <Input placeholder='Search' value={search} onChange={(e) => setSearch(e.target.value)}/>
         <InputRightElement>
-          <Text mr="2" color="blue" fontWeight="bold">Find</Text>
+          <SearchIcon />
         </InputRightElement>
       </InputGroup>
       <Button onClick={loadClient}>
