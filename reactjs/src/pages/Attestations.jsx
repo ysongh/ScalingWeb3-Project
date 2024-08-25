@@ -50,6 +50,12 @@ function Attestations() {
     setschemaList(res.rows);
   }
 
+  async function getAttestationByID() {
+    const indexService = new IndexService('testnet');
+    const res = await indexService.queryAttestation("onchain_evm_11155111_0x5");
+    console.log(res);
+  }
+
   return (
     <Container maxW='1100px'>
       <h1>Attestations</h1>
@@ -70,6 +76,9 @@ function Attestations() {
       </Button>
       <Button onClick={getSchemaListFromIndexService}>
         Get Schema List From Index Service
+      </Button>
+      <Button onClick={getAttestationByID}>
+        Get Attestation By ID
       </Button>
       <TableList schemaList={schemaList} />
     </Container>
