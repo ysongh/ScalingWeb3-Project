@@ -6,7 +6,7 @@ function TableList({ schemaList }) {
     <Table variant="striped" colorScheme="teal">
       <Thead>
         <Tr>
-          <Th>Schema Id</Th>
+          <Th>Id</Th>
           <Th>Registrant</Th>
           <Th>Description</Th>
         </Tr>
@@ -14,7 +14,7 @@ function TableList({ schemaList }) {
       <Tbody>
         {schemaList.map(s => (
           <Tr key={s.id}>
-            <Td>{s.schemaId}</Td>
+            <Td>{s.id}</Td>
             <Td>{s.registrant}</Td>
             <Td>{s.description}</Td>
           </Tr>
