@@ -8,7 +8,7 @@ function TableList({ schemaList }) {
         <Tr>
           <Th>Schema Id</Th>
           <Th>Registrant</Th>
-          <Th>Transaction Hash</Th>
+          <Th>Description</Th>
         </Tr>
       </Thead>
       <Tbody>
@@ -16,7 +16,7 @@ function TableList({ schemaList }) {
           <Tr key={s.id}>
             <Td>{s.schemaId}</Td>
             <Td>{s.registrant}</Td>
-            <Td>{s.transactionHash}</Td>
+            <Td>{s.description}</Td>
           </Tr>
         ))}
       </Tbody>
