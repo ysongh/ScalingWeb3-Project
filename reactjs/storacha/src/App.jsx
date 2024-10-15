@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Authenticator, Provider, Uploader } from '@w3ui/react'
 
+import { AuthenticationEnsurer } from './components/AuthenticationEnsurer';
+
 function App() {
 
   return (
@@ -10,8 +12,10 @@ function App() {
       </h1>
       <Provider>
         <Authenticator>
-          <Uploader>
-          </Uploader>
+          <AuthenticationEnsurer>
+            <Uploader>
+            </Uploader>
+          </AuthenticationEnsurer>
         </Authenticator>
       </Provider>
     </>
