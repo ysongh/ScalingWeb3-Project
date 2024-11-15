@@ -1,5 +1,6 @@
 import { 
   ConnectWallet, 
+  ConnectWalletText,
   Wallet, 
   WalletDropdown, 
   WalletDropdownDisconnect, 
@@ -17,6 +18,7 @@ export function WalletComponent() {
     <div className="flex justify-end">
       <Wallet>
         <ConnectWallet>
+          <ConnectWalletText>Log In</ConnectWalletText>
           <Avatar className="h-6 w-6" />
           <Name />
         </ConnectWallet>
