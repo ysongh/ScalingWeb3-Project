@@ -15,7 +15,7 @@ import { color } from '@coinbase/onchainkit/theme';
  
 export function WalletComponent() {
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-center">
       <Wallet>
         <ConnectWallet>
           <ConnectWalletText>Log In</ConnectWalletText>
