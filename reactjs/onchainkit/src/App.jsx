@@ -2,6 +2,7 @@ import { Providers } from "./providers";
 import { Rainbowproviders } from "./rainbowproviders";
 import { WalletComponent } from "./Wallet";
 import { RainbowWallet } from "./RainbowWallet";
+import DisplayToken from "./components/DisplayToken";
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
         </h1>
         <RainbowWallet /> 
       </Rainbowproviders>
+
+      <DisplayToken />
     </> 
   )
 }
