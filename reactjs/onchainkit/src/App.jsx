@@ -8,12 +8,16 @@ function App() {
   return (
     <>
       <Providers>
-        <h1>OnchainKit</h1>
+        <h1 className="text-center">
+          OnchainKit
+        </h1>
         <WalletComponent /> 
       </Providers>
 
       <Rainbowproviders>
-        <h1>Use RainbowKit for wallet aggregation</h1>
+        <h1 className="text-center">
+          Use RainbowKit for wallet aggregation
+        </h1>
         <RainbowWallet /> 
       </Rainbowproviders>
     </> 
