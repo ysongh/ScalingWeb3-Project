@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Providers>
-        <h1 className="text-center">
+        <h1 className="text-center text-2xl">
           OnchainKit
         </h1>
         <WalletComponent /> 
