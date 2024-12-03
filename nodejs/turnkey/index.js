@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { Turnkey } = require("@turnkey/sdk-server");
+const { Turnkey, DEFAULT_ETHEREUM_ACCOUNTS } = require("@turnkey/sdk-server");
 
 const turnkey = new Turnkey({
   apiBaseUrl: "https://api.turnkey.com",
@@ -21,6 +21,22 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => res.send('It Work'));
+
+app.get('/create-wallet', async (req, res) => {
+  try {
+    const walletResponse = await apiClient.createWallet({
+      walletName: "Example Wallet 1",
+      accounts: DEFAULT_ETHEREUM_ACCOUNTS,
+    });
+    
+    const walletId = walletResponse.walletId;
+    const accountAddress = walletResponse.addresses[0];
+
+    res.json({ walletId, accountAddress });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 const port = process.env.PORT || 4000;
 
