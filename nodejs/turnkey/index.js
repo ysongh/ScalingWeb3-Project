@@ -22,6 +22,16 @@ app.use(cors());
 
 app.get('/', (req, res) => res.send('It Work'));
 
+app.get('/get-wallet', async (req, res) => {
+  try {
+    const walletsResponse = await apiClient.getWallets();
+    
+    res.json({ walletsResponse });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.get('/create-wallet', async (req, res) => {
   try {
     const walletResponse = await apiClient.createWallet({
