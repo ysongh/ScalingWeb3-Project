@@ -60,6 +60,18 @@ app.get('/get-organization', async (req, res) => {
   }
 });
 
+app.get('/list-user-tags', async (req, res) => {
+  try {
+    const response = await apiClient.listUserTags();
+
+    const tagsData = response.userTags;
+
+    res.json({ tagsData });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
