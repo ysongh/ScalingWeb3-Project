@@ -48,6 +48,18 @@ app.get('/create-wallet', async (req, res) => {
   }
 });
 
+app.get('/get-organization', async (req, res) => {
+  try {
+    const response = await apiClient.getOrganization();
+
+    const organizationData = response.organizationData;
+
+    res.json({organizationData});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
