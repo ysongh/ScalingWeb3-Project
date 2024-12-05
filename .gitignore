@@ -16,6 +16,7 @@ dist-ssr
 pnpm-lock.yaml
 config.js
 yarn.lock
+keys.js
 
 # Editor directories and files
 .vscode/*
