@@ -10,10 +10,26 @@ function App() {
   
   const passkeyClient = turnkey.passkeyClient();
   console.log(passkeyClient);
+
+  const createPasskeyCredential = async () => {
+    const credential = await passkeyClient.createUserPasskey({
+      publicKey: {
+        user: {
+          name: "",
+          displayName: ""
+        }
+      }
+    });
+
+    console.log(credential);
+  }
   
   return (
     <>
       <h1>First time using Turnkey </h1>
+      <button onClick={createPasskeyCredential}>
+        Create Passkey Credential
+      </button>
     </>
   )
 }
