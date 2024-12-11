@@ -1,6 +1,7 @@
 import { TurnkeyProvider } from "@turnkey/sdk-react";
 
 import BrowserSDK from "./BrowserSDK";
+import ReactSDK from "./ReactSDK";
 import { TURNKEY_ORGANIZATION_ID } from "./keys";
 
 const turnkeyConfig = {
@@ -18,6 +19,7 @@ function App() {
     <TurnkeyProvider config={turnkeyConfig}>
       <h1>First time using Turnkey </h1>
       <BrowserSDK />
+      <ReactSDK />
     </TurnkeyProvider>
   )
 }
