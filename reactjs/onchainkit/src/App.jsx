@@ -1,9 +1,11 @@
 import { Providers } from "./providers";
+
 import { Rainbowproviders } from "./rainbowproviders";
 import { WalletComponent } from "./Wallet";
 import { RainbowWallet } from "./RainbowWallet";
 import DisplayToken from "./components/DisplayToken";
 import DisplayENS from "./components/DisplayENS";
+import OnchainCheckout from "./components/OnchainCheckout";
 
 function App() {
 
@@ -13,7 +15,8 @@ function App() {
         <h1 className="text-center text-2xl">
           OnchainKit
         </h1>
-        <WalletComponent /> 
+        <WalletComponent />
+        <OnchainCheckout />
       </Providers>
 
       <Rainbowproviders>
@@ -23,7 +26,6 @@ function App() {
         <RainbowWallet /> 
         <DisplayENS />
       </Rainbowproviders>
-
       <DisplayToken />
     </> 
   )
