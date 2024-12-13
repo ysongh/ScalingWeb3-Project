@@ -1,5 +1,6 @@
-import { Providers } from "./providers";
+import { FundButton } from '@coinbase/onchainkit/fund';
 
+import { Providers } from "./providers";
 import { Rainbowproviders } from "./rainbowproviders";
 import { WalletComponent } from "./Wallet";
 import { RainbowWallet } from "./RainbowWallet";
@@ -17,6 +18,8 @@ function App() {
         </h1>
         <WalletComponent />
         <OnchainCheckout />
+        <h2>Create a funding flow to onboard users</h2>
+        <FundButton />
       </Providers>
 
       <Rainbowproviders>

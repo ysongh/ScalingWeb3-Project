@@ -3,7 +3,7 @@ import { Checkout, CheckoutButton, CheckoutStatus } from '@coinbase/onchainkit/c
 function OnchainCheckout() {
   return (
     <div>
-      <h2>Checkout</h2>
+      <h2>Integrate USDC checkout flows with ease</h2>
 
       <Checkout productId='my-product-id' > 
         <CheckoutButton coinbaseBranded/>
