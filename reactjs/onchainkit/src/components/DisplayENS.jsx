@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Name } from '@coinbase/onchainkit/identity';
+import { IdentityCard } from '@coinbase/onchainkit/identity'; 
 
 function DisplayENS() {
   const [val, setVal] = useState("");
@@ -26,6 +27,9 @@ function DisplayENS() {
           </label>
         </div>
         <Name address={val}/>
+        <IdentityCard
+          address={val}
+        /> 
       </div>
     </>
   )
