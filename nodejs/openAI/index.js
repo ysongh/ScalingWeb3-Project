@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const OpenAI = require('openai');
+const fs = require("fs");
 
 const app = express();
 
@@ -50,7 +51,7 @@ app.get('/getName', async (req, res) => {
       max_tokens: 500
     });
 
-    console.log(response.choices[0].message.content);
+    fs.appendFileSync("history.txt", response.choices[0].message.content + "\n");
     res.json({ data: response.choices[0].message.content });
   } catch (error) {
     console.error('Error:', error);
