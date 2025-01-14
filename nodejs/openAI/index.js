@@ -59,6 +59,17 @@ app.get('/getName', async (req, res) => {
   }
 });
 
+app.get('/loadNames', async (req, res) => {
+  try {
+    const loadedHistory = fs.readFileSync("history.txt", "utf8");
+
+    res.json({ data: loadedHistory });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
