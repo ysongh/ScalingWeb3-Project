@@ -70,6 +70,37 @@ app.get('/loadNames', async (req, res) => {
   }
 });
 
+
+app.get('/read-image-byurl', async (req, res) => {
+  try {
+    const response = await client.chat.completions.create({
+      model: "Meta-Llama-3-8B-Instruct-Q5_K_M",
+      messages: [
+        { role: "system", content: "You are an artist" },
+        {
+          role: "user",
+          content: [
+            { type: "text", text: "What's in this image?" },
+            {
+              type: "image_url",
+              image_url: {
+                url: "https://images.unsplash.com/photo-1483004406427-6acb078d1f2d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0ZXJ8ZW58MHx8MHx8fDI%3D"
+              }
+            }
+          ]
+        }
+      ],
+      temperature: 0.7,
+      max_tokens: 500
+    });
+
+    res.json({ data: response.choices[0].message.content });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
