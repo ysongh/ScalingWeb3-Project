@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@coinbase/cdp-agentkit-core": "^0.0.14",
     "@coinbase/cdp-langchain": "^0.0.13",
+    "@langchain/langgraph": "^0.2.44",
     "@langchain/openai": "^0.3.17",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
