@@ -22,6 +22,8 @@ async function initializeAgent() {
   // Initialize LLM
   const llm = new ChatOpenAI({
     model: "gpt-4o-mini",
+    baseURL: process.env.OPENAI_BASEURL,
+    apiKey: process.env.OPENAI_APIKEY
   });
 
   let walletDataStr = null;
