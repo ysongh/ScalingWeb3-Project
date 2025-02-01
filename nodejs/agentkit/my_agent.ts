@@ -1,12 +1,12 @@
-import { CdpAgentkit } from "@coinbase/cdp-agentkit-core";
-import { CdpToolkit } from "@coinbase/cdp-langchain";
-import { MemorySaver } from "@langchain/langgraph";
-import { createReactAgent } from "@langchain/langgraph/prebuilt";
-import { ChatOpenAI } from "@langchain/openai";
-import { HumanMessage } from "@langchain/core/messages";
-import * as readline from "readline";
-import * as dotenv from "dotenv";
-import * as fs from "fs";
+const { CdpAgentkit } = require("@coinbase/cdp-agentkit-core");
+const { CdpToolkit } = require("@coinbase/cdp-langchain");
+const { MemorySaver } = require("@langchain/langgraph");
+const { createReactAgent } = require("@langchain/langgraph/prebuilt");
+const { ChatOpenAI } = require("@langchain/openai");
+const { HumanMessage } = require("@langchain/core/messages");
+const readline = require("readline");
+const dotenv = require("dotenv");
+const fs = require("fs");
 
 dotenv.config();
 
@@ -24,7 +24,7 @@ async function initializeAgent() {
     model: "gpt-4o-mini",
   });
 
-  let walletDataStr: string | null = null;
+  let walletDataStr = null;
 
   // Read existing wallet data if available
   if (fs.existsSync(WALLET_DATA_FILE)) {
@@ -75,8 +75,7 @@ async function initializeAgent() {
  * @param agent - The agent executor
  * @param config - Agent configuration
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function runChatMode(agent: any, config: any) {
+async function runChatMode(agent, config) {
   console.log("Starting chat mode... Type 'exit' to end.");
 
   const rl = readline.createInterface({
@@ -84,11 +83,10 @@ async function runChatMode(agent: any, config: any) {
     output: process.stdout,
   });
 
-  const question = (prompt: string): Promise<string> =>
+  const question = (prompt) =>
     new Promise(resolve => rl.question(prompt, resolve));
 
   try {
-    // eslint-disable-next-line no-constant-condition
     while (true) {
       const userInput = await question("\nPrompt: ");
 
